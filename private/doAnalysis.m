@@ -147,7 +147,12 @@ if showPowerSurfaces
     f1 = figure;
     set(0, 'CurrentFigure', f1);
     colormap parula;
-    imagesc(alt, wt.fourierWavelength, (wt.powerSurface));
+    % -------------------Normalize Surface--------------------------
+    pSurfMin = min(wt.powerSurface); 
+    pSurfMax = max(wt.powerSurface);
+    normalizedPowerSurface = ((wt.powerSurface) - pSurfMin) ./ (pSurfMax - pSurfMin);
+    %--------------------End Of Normalize Surface-------------------
+    imagesc(alt, wt.fourierWavelength, normalizedPowerSurface);  % imagesc(alt, wt.fourierWavelength, (wt.powerSurface));
     [~, titleName, ~] = fileparts(f);
     titleString = sprintf("%s", titleName);
     title(titleString, 'Interpreter', 'none');

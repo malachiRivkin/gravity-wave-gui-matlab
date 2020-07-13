@@ -5,17 +5,18 @@ addpath('./acf/'); % for autocorrelation function
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                           User defined variables                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-dataDirectory = '/Users/thomascolligan/chile_data/renamed/bad_data_removed/all/';
-saveDirectory = '~/stokes-params/before_eclipse';
+dataDirectory = '_input';   %This line will need to be modified to point towards folder on local machine
+saveDirectory = '_output';  %This line will need to be modified to point towards folder on local machine
+
 % The w/f happened with no correction to wind direction, a window of
 % 12km - 40km, and a heightSamplingFrequency of 5m.
 % heightSamplingFrequency of 7m makes a 90 w/f show up.
 showPowerSurfaces = true; % Do you want to show the wavelet transform power surfaces?
-save = false; % Do you want to save the data? It will save in saveDirectory.
+save = true; % Do you want to save the data? It will save in saveDirectory.
 lowerCutOffAltitude = 12000; % Altitude where you want to start analysis
 upperCutOffAltitude = 40000; % Altitude where you want to end analysis - 
 % a value of 40000 will go to the highest point in the profile.
-latitude = 45; % Latitude of launch location.
+latitude = 46.860; % Latitude of launch location.
 heightSamplingFrequency = 5;
 printData = true;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -129,7 +130,7 @@ set(0, 'CurrentFigure', f1);
 xlabel('Longitude (deg)');
 ylabel("Latitude (deg)");
 zlabel("Altitude (m)");
-title("Gravity wave detection altitudes and directions (deg cw from North)");
+title("Gravity wave detection locations and directions (deg cw from North)");
 set(0, 'CurrentFigure', f2);
 allFiles = dir(textFiles);
 filenames = allFiles(indicesForFilenames)';

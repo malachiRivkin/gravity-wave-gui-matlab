@@ -1,4 +1,4 @@
-d = '~/stokes-params/before_eclipse';
+d = '_output';
 all = readGravityWaveParameters(d);
 
 % theta is in unit circle angle here.

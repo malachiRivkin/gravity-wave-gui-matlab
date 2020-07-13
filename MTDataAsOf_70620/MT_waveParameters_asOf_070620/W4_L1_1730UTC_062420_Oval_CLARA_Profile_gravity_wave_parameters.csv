@@ -1,0 +1,3 @@
+alt_of_detection_km,lat_of_detection,lon_of_detection,vert_wavelength_km,horiz_wavelength_km,propagation_dir,axial_ratio,int_vert_group_vel_ms,int_horiz_group_vel_ms,int_vert_phase_spd_ms,int_horiz_phase_spd_ms,degreeofpolarization,stokes_param_Q
+13.15,46.989292,-113.439441,0.448261460594748,11.6471209067912,116.279397121064,5.7133394719782,-0.04074707573932,1.05872612181373,0.042034818501455,1.09218537933619,0.592867324225617,-0.0707972974631347
+13.15,46.989,-113.44,0.44826,11.287,116.28,5.7133,-0.042048,1.0587,0.043377,1.0922,0.59287,-0.070797

@@ -1,12 +1,11 @@
-d = '/Users/thomascolligan/chile_data/renamed/bad_data_removed/all';
+
+d = '_input';
 t = fullfile(d, "*.txt");
 files = dir(t);
 for i=1:size(files)
     current = files(i).name;
     current = fullfile(d, current);
-    if ~contains(current, 'C12')
-        continue
-    end
+
     data = readRadioSondeData(current);
     [~, idx] = max(data.Alt);
     data = data(1:idx, :);
@@ -19,12 +18,14 @@ for i=1:size(files)
     subplot(2, 1, 1)
     [alt, u, v, temp, bvFreqSquared] = ... 
         preprocessDataNoResample(data.Alt, u, v, data.T, data.P, 5);
+    
     while(true)
+        %----------------------------------------------
         subplot(1, 3, 1);
         plot(u, alt, 'b');
         subplot(1, 3, 2);
         plot(v, alt, 'b');
-        sgtitle(files(i).name, 'Interpreter', 'none');
+        %sgtitle(files(i).name, 'Interpreter', 'none');
         [x, y] = ginput(2);
         [~, alt_1] = min(abs(alt - y(1)));
         [~, alt_2] = min(abs(alt - y(2)));
@@ -44,6 +45,8 @@ for i=1:size(files)
         plot(u(lower), v(lower), 'ro','MarkerSize', 14);
         % black is upper
         plot(u(upper), v(upper), 'ko', 'MarkerSize', 14);
+        %------------------------------------
+        
         ellipse_save = 'Save hodograph data? Y/N [N]';
         str = input(ellipse_save, 's');
         if ~isempty(str)
@@ -55,7 +58,7 @@ for i=1:size(files)
             T = table(alt(lower:upper), u(lower:upper), v(lower:upper), temp(lower:upper), bvFreqSquared(lower:upper));
             T.Properties.VariableNames = {'alt' 'u' 'v' 'temp' 'bv2'};
             [~, n, ~] = fileparts(files(i).name);
-            fname = sprintf("~/hodographs/%s-%d-%d.txt", n, alt(lower), alt(upper));
+            fname = sprintf("hodographs/%s-%d-%d.txt", n, alt(lower), alt(upper)); %sprintf("%s-%d-%d.txt", n, alt(lower), alt(upper));
             writetable(T, fname);
 
         end
