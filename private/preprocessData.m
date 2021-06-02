@@ -28,7 +28,7 @@ bvFreqSquared = bruntVaisalaFrequency(potentialTemperature, heightSamplingFreque
 meanU = movmean(u, np);
 meanV = movmean(v, np);
 meanT = movmean(temp, np);
-u = u - meanU;
+u = u - meanU; 
 v = v - meanV;
 temp = temp - meanT;
 end

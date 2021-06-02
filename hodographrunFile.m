@@ -17,14 +17,19 @@ for i=1:size(files)
     v = -data.Ws .* cosd(data.Wd); %    
     subplot(2, 1, 1)
     [alt, u, v, temp, bvFreqSquared] = ... 
-        preprocessDataNoResample(data.Alt, u, v, data.T, data.P, 5);
+        preprocessDataNoResample(data.Alt, u, v, data.T, data.P, 5); %last argument is heightSamplingFrequency
     
     while(true)
         %----------------------------------------------
+        figure(2)
         subplot(1, 3, 1);
+        
         plot(u, alt, 'b');
+        title("U-WIND")
         subplot(1, 3, 2);
+        
         plot(v, alt, 'b');
+        title("V-WIND")
         %sgtitle(files(i).name, 'Interpreter', 'none');
         [x, y] = ginput(2);
         [~, alt_1] = min(abs(alt - y(1)));

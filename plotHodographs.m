@@ -1,6 +1,11 @@
+clear ll
+close all
+clc
+addpath('./dnsfnu/');
+
 d = 'hodographs/';
 
-t = fullfile(d, "*.txt");
+t = fullfile(d, "*.csv"); %.txt
 files = dir(t); 
 axs = [];
 series_figure = figure;
@@ -28,8 +33,12 @@ for k=1:size(unique_flights, 2)
     ax = subplot(6, 5, i);
     axs = [axs;ax];
     eps = fit_ellipse(data.u, data.v, ax);
+    disp(eps.a)
+    disp(eps.b)
+    disp(eps.phi)
     hold on
     plot(data.u, data.v, 'k.')
+    %-------
     lambda_z = 2*(data.alt(end) - data.alt(1));
     m = 2*pi / lambda_z;
     p = eps.phi;
@@ -51,9 +60,11 @@ for k=1:size(unique_flights, 2)
     int2 = intrinsicFreq/k_h_2;
     % fprintf("m:%f, lz:%f, h:%f, kh:%f\n", m, lambda_z, intrinsicHorizPhaseSpeed, int2);
     dTdz = dT./dz;
+    %eta = mean(dTdz.*urot(1:end-1)); commented out 12/31
     eta = mean(dTdz.*urot(1:end-1));
     if eta < 0
         p = p - pi;
+        negative = "eta negative"
     end
     str = sprintf("f: %s, ^{w}/{f}=%0.1f, t=%0.1f, m_z=%0.1f", ...
         files(i).name(1:3), wf, azimuthFromUnitCircle(rad2deg(p)),...
@@ -75,7 +86,7 @@ for k=1:size(unique_flights, 2)
     %quiver(p1(1),p1(2),dp(1),dp(2), 'AutoScale', 'on', 'color','#9a0200', 'linewidth', 2);
     [xf, yf] = ds2nfu([x1 x2], [y1 y2]);
     annotation(gcf, 'arrow', xf,yf, 'color', '#9a0200', 'LineWidth', 2)
-    if strcmp(flight_number, "F23")
+    if strcmp(flight_number, "W5")
         if alt_of_detection_km > 20 && alt_of_detection_km < 24
             xc = [xf(1) - 0.125, xf(2)-0.02];
             yc = [yf(1) + 0.1, yf(1)+0.05];
@@ -93,7 +104,7 @@ for k=1:size(unique_flights, 2)
     end
     offsets = [offsets, counter*offset];
     counter = counter + 1;
-end
+%end
 % 10 -> 150
 
 linkaxes(axs, 'xy');

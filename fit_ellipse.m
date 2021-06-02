@@ -261,7 +261,7 @@ if (nargin>2) & ~isempty( axis_handle ) & (test>0)
     % draw
     hold_state = get( axis_handle,'NextPlot' );
     set( axis_handle,'NextPlot','add' );
-    plot( new_ver_line(1,:),new_ver_line(2,:),'r');
+    %plot( new_ver_line(1,:),new_ver_line(2,:),'r');
     plot( new_horz_line(1,:),new_horz_line(2,:),'r');
     p1 = plot( rotated_ellipse(1,:),rotated_ellipse(2,:),'r' );
     set( axis_handle,'NextPlot',hold_state );
